@@ -11,50 +11,75 @@ const App = () => {
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       
-      <section className="relative h-screen pt-16">
-        <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: "url('https://source.unsplash.com/1600x900/?cookies,biscuits')"}}></div>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative container mx-auto px-4 h-full flex items-center justify-center text-center text-white">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl font-bold mb-6">Welcome to Kayce Modern Shop</h1>
-            <p className="text-xl mb-8">Discover our delicious selection of cookies and biscuits</p>
-            <div className="space-x-4">
-              <a href="#products" className="bg-primary hover:bg-primary-dark px-8 py-3 rounded-lg text-white font-semibold transition-colors">Our Products</a>
-              <a href="#contact" className="bg-white hover:bg-gray-100 px-8 py-3 rounded-lg text-gray-900 font-semibold transition-colors">Contact Us</a>
+      {/* Hero Section - More responsive */}
+      <section className="relative min-h-[60vh] md:h-[70vh] pt-20 md:pt-16 bg-gradient-to-b from-cream-DEFAULT to-cream-light dark:from-brown-dark dark:to-brown-darkest">
+        <div className="container mx-auto px-4 h-full flex items-center justify-center text-center">
+          <div className="max-w-xl md:max-w-2xl px-4 md:px-0">
+            <h1 className="text-3xl md:text-5xl font-serif font-bold mb-4 md:mb-6 text-brown-dark dark:text-cream-light leading-tight">
+              Welcome to Kayce Shop
+            </h1>
+            <p className="text-base md:text-lg mb-6 md:mb-8 text-brown dark:text-cream-dark px-2">
+              Fresh baked cookies and artisanal biscuits
+            </p>
+            <a href="#products" 
+               className="inline-block bg-primary hover:bg-primary-dark px-6 md:px-8 py-2 md:py-3 rounded-lg text-cream-light font-medium transition-colors shadow-lg hover:shadow-xl text-sm md:text-base">
+              View Our Products
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Products Section - Better grid spacing */}
+      <section id="products" className="py-12 md:py-16 bg-cream dark:bg-brown-dark">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold text-center mb-8 md:mb-12 text-brown-dark dark:text-cream-light">
+            Our Products
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+            <div className="bg-cream-light dark:bg-brown p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-lg md:text-xl font-serif mb-2 md:mb-3 text-brown-dark dark:text-cream-light">
+                Classic Cookies
+              </h3>
+              <p className="text-sm md:text-base text-brown dark:text-cream-dark">
+                Traditional recipes with premium ingredients
+              </p>
+            </div>
+            <div className="bg-cream-light dark:bg-brown p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-lg md:text-xl font-serif mb-2 md:mb-3 text-brown-dark dark:text-cream-light">
+                Special Biscuits
+              </h3>
+              <p className="text-sm md:text-base text-brown dark:text-cream-dark">
+                Artisanal selection for special occasions
+              </p>
+            </div>
+            <div className="bg-cream-light dark:bg-brown p-4 md:p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <h3 className="text-lg md:text-xl font-serif mb-2 md:mb-3 text-brown-dark dark:text-cream-light">
+                Gift Sets
+              </h3>
+              <p className="text-sm md:text-base text-brown dark:text-cream-dark">
+                Perfect for sharing and gifting
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="about" className="py-20 bg-white dark:bg-gray-800">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">About Us</h2>
-          <p className="text-lg text-center max-w-3xl mx-auto">
-            At Kayce Modern Shop, we specialize in creating delightful cookies and biscuits using traditional recipes with a modern twist. Our commitment to quality ingredients and artisanal baking methods ensures every bite is pure pleasure.
+      {/* Contact Section - Better padding */}
+      <section id="contact" className="py-12 md:py-16 bg-cream-light dark:bg-brown-darkest">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3 md:mb-4 text-brown-dark dark:text-cream-light">
+            Get in Touch
+          </h2>
+          <p className="text-sm md:text-base text-brown dark:text-cream-dark mb-4 md:mb-6 px-4">
+            Have questions? We'd love to hear from you.
           </p>
-        </div>
-      </section>
-
-      <section id="products" className="py-20 bg-gray-50 dark:bg-gray-700">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Popular Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Chocolate Chip Classics</h3>
-              <p className="text-gray-600 dark:text-gray-300">Our bestselling cookies made with premium chocolate</p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Butter Shortbread</h3>
-              <p className="text-gray-600 dark:text-gray-300">Traditional Scottish recipe with pure butter</p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-semibold mb-4">Oatmeal Raisin</h3>
-              <p className="text-gray-600 dark:text-gray-300">Wholesome and delicious, perfect with tea</p>
-            </div>
-          </div>
+          <a href="mailto:contact@kayceshop.com" 
+             className="text-primary hover:text-primary-dark transition-colors font-medium inline-block">
+            contact@kayceshop.com
+          </a>
         </div>
       </section>
     </div>

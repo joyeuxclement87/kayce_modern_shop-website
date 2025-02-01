@@ -4,49 +4,54 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all ${
-      darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'
-    }`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 px-4 py-2 md:py-3 transition-all ${
+      darkMode ? 'bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'
+    } border-b ${darkMode ? 'border-brown-dark' : 'border-cream-dark'} shadow-md`}>
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="text-2xl font-bold">Kayce Shop</a>
+        <a href="/" className="text-lg md:text-xl font-serif font-bold text-primary hover:text-primary-dark transition-colors">
+          Kayce Shop
+        </a>
         
-        <button 
-          className="lg:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-
-        <div className={`${isMenuOpen ? 'flex' : 'hidden'} lg:flex flex-col lg:flex-row items-center gap-8 absolute lg:relative top-full left-0 right-0 lg:top-auto bg-inherit lg:bg-transparent p-6 lg:p-0 shadow-lg lg:shadow-none ${
-          darkMode ? 'bg-gray-900' : 'bg-white'
-        }`}>
-          <a href="#home" className="hover:text-primary transition-colors">Home</a>
-          <a href="#products" className="hover:text-primary transition-colors">Our Products</a>
-          <a href="#about" className="hover:text-primary transition-colors">About</a>
-          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+        <div className="flex items-center gap-3 md:gap-6">
+          <div className="hidden md:flex items-center space-x-6">
+            <a href="#products" className="hover:text-primary transition-colors text-base">Products</a>
+            <a href="#contact" className="hover:text-primary transition-colors text-base">Contact</a>
+          </div>
+          
           <button 
             onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="p-1.5 md:p-2 rounded-full hover:bg-cream-dark dark:hover:bg-brown transition-colors"
             aria-label="Toggle dark mode"
           >
-            {darkMode ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                  d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
-                />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                  d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                />
-              </svg>
-            )}
+            {darkMode ? '🌞' : '🌙'}
+          </button>
+
+          <button 
+            className="md:hidden p-1"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
           </button>
         </div>
       </div>
+
+      {/* Mobile menu - Improved transitions and spacing */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-cream-dark dark:border-brown-dark animate-fadeIn">
+          <div className="py-2">
+            <a href="#products" 
+               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
+              Products
+            </a>
+            <a href="#contact" 
+               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
+              Contact
+            </a>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
