@@ -14,6 +14,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         
         <div className="flex items-center gap-3 md:gap-6">
           <div className="hidden md:flex items-center space-x-6">
+            <a href="#who-we-are" className="hover:text-primary transition-colors text-base">Who We Are</a>
             <a href="#products" className="hover:text-primary transition-colors text-base">Products</a>
             <a href="#contact" className="hover:text-primary transition-colors text-base">Contact</a>
           </div>
@@ -41,6 +42,10 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       {isMenuOpen && (
         <div className="md:hidden border-t border-cream-dark dark:border-brown-dark animate-fadeIn">
           <div className="py-2">
+            <a href="#who-we-are" 
+               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
+              Who We Are
+            </a>
             <a href="#products" 
                className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
               Products
