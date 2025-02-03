@@ -91,8 +91,8 @@ const App = () => {
     setActiveQuestion(activeQuestion === index ? null : index);
   };
 
-  return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
+  return ( 
+    <div className={`min-h-screen pt-[104px] ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       
       {/* Enhanced Hero Section - Updated Copy */}
@@ -328,46 +328,53 @@ const App = () => {
       </section>
 
       {/* Enhanced About Us Section */}
-      <section id="about" className="py-16 md:py-24 bg-cream dark:bg-brown">
-        <div className="container mx-auto px-4">
-          {/* Section Header */}
+      <section id="about" className="py-16 md:py-24 bg-gradient-to-br from-cream-light via-cream to-cream-dark dark:from-brown-darkest dark:via-brown-dark dark:to-brown relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px]"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/20 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative">
+          {/* Section Header - Updated colors */}
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-medium mb-4 inline-block">OUR STORY</span>
+            <span className="text-primary-dark dark:text-primary-light font-medium mb-4 inline-block px-4 py-1 bg-primary/10 rounded-full">OUR STORY</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
               About Kayce Modern Shop
             </h2>
-            <p className="text-lg text-brown-dark/80 dark:text-cream-light/80">
+            <p className="text-lg text-brown/80 dark:text-cream-light/90">
               A journey of excellence in premium biscuits and cookies since 2015
             </p>
           </div>
 
-          {/* History Timeline */}
+          {/* History Timeline - Updated colors */}
           <div className="relative max-w-4xl mx-auto mb-20">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-primary/20"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-primary/30 dark:bg-primary/20"></div>
             
+            {/* Update the timeline items with new background colors */}
             <div className="space-y-12">
               {/* 2015 */}
               <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="md:text-right">
-                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2015</h3>
-                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                  <div className="bg-white/50 dark:bg-brown-dark/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-cream-dark/10 dark:border-brown-light/10">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary-dark dark:text-primary-light">2015</h3>
+                    <p className="text-brown-dark/90 dark:text-cream-light/90">
                       Founded in Kigali with a vision to bring premium international biscuits to Rwanda
                     </p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-cream-light dark:border-brown-dark"></div>
                 <div className="hidden md:block"></div>
               </div>
 
-              {/* 2018 */}
+              {/* Update other timeline items similarly... */}
               <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="hidden md:block"></div>
-                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-cream-light dark:border-brown-dark"></div>
                 <div>
-                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2018</h3>
-                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                  <div className="bg-white/50 dark:bg-brown-dark/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-cream-dark/10 dark:border-brown-light/10">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary-dark dark:text-primary-light">2018</h3>
+                    <p className="text-brown-dark/90 dark:text-cream-light/90">
                       Expanded operations nationwide, becoming Rwanda's leading premium biscuit supplier
                     </p>
                   </div>
@@ -377,74 +384,74 @@ const App = () => {
               {/* 2023 */}
               <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div className="md:text-right">
-                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
-                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2023</h3>
-                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                  <div className="bg-white/50 dark:bg-brown-dark/50 backdrop-blur-sm p-6 rounded-lg shadow-lg border border-cream-dark/10 dark:border-brown-light/10">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary-dark dark:text-primary-light">2023</h3>
+                    <p className="text-brown-dark/90 dark:text-cream-light/90">
                       Achieved milestone of serving over 5,000 satisfied customers across the country
                     </p>
                   </div>
                 </div>
-                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary border-4 border-cream-light dark:border-brown-dark"></div>
                 <div className="hidden md:block"></div>
               </div>
             </div>
           </div>
 
-          {/* Core Values */}
+          {/* Core Values - Updated colors */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-20">
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-8 bg-white/30 dark:bg-brown-dark/30 backdrop-blur-sm rounded-xl border border-cream-dark/10 dark:border-brown-light/10 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 dark:bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary-dark dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
               <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Excellence</h3>
-              <p className="text-brown-dark/80 dark:text-cream-light/80">
+              <p className="text-brown-dark/80 dark:text-cream-light/90">
                 Committed to delivering the highest quality products and service in every interaction
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* Update other core values similarly... */}
+            <div className="text-center p-8 bg-white/30 dark:bg-brown-dark/30 backdrop-blur-sm rounded-xl border border-cream-dark/10 dark:border-brown-light/10 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 dark:bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary-dark dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
               <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Innovation</h3>
-              <p className="text-brown-dark/80 dark:text-cream-light/80">
+              <p className="text-brown-dark/80 dark:text-cream-light/90">
                 Continuously exploring new products and ways to serve our customers better
               </p>
             </div>
 
-            <div className="text-center p-6">
-              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
-                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="text-center p-8 bg-white/30 dark:bg-brown-dark/30 backdrop-blur-sm rounded-xl border border-cream-dark/10 dark:border-brown-light/10 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/20 dark:bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary-dark dark:text-primary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </div>
               <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Customer First</h3>
-              <p className="text-brown-dark/80 dark:text-cream-light/80">
+              <p className="text-brown-dark/80 dark:text-cream-light/90">
                 Putting our customers' needs at the heart of everything we do
               </p>
             </div>
           </div>
 
-          {/* Team Section */}
+          {/* Team Section - Updated colors */}
           <div className="max-w-5xl mx-auto">
             <h3 className="text-2xl font-serif font-bold text-center mb-12 text-brown-dark dark:text-cream-light">
               Meet Our Leadership Team
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Team Member 1 */}
-              <div className="text-center">
+              <div className="text-center group">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent group-hover:from-primary/70 transition-all duration-300"></div>
                   <img 
                     src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" 
                     alt="John Smith" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
                 </div>
                 <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">John Smith</h4>
                 <p className="text-primary font-medium mb-3">Founder & CEO</p>
@@ -453,15 +460,15 @@ const App = () => {
                 </p>
               </div>
 
-              {/* Team Member 2 */}
-              <div className="text-center">
+              {/* Update other team members similarly... */}
+              <div className="text-center group">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent group-hover:from-primary/70 transition-all duration-300"></div>
                   <img 
                     src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80" 
                     alt="Sarah Johnson" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
                 </div>
                 <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Sarah Johnson</h4>
                 <p className="text-primary font-medium mb-3">Operations Director</p>
@@ -470,15 +477,14 @@ const App = () => {
                 </p>
               </div>
 
-              {/* Team Member 3 */}
-              <div className="text-center">
+              <div className="text-center group">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent group-hover:from-primary/70 transition-all duration-300"></div>
                   <img 
                     src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" 
                     alt="Michael Chen" 
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
                 </div>
                 <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Michael Chen</h4>
                 <p className="text-primary font-medium mb-3">Customer Relations</p>
@@ -614,105 +620,107 @@ const App = () => {
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section className="py-16 md:py-24 bg-cream dark:bg-brown relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-cream-light via-cream to-cream-dark dark:from-brown-darkest dark:via-brown-dark dark:to-brown relative overflow-hidden">
         {/* Enhanced Decorative Elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/10 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 animate-pulse"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-primary font-medium mb-4 inline-block">TESTIMONIALS</span>
+            <span className="text-primary-dark dark:text-primary-light font-medium mb-4 inline-block px-4 py-1 bg-primary/10 rounded-full">TESTIMONIALS</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">
               What Our Customers Say
             </h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-base md:text-lg text-brown-dark/80 dark:text-cream-light/80">
+            <div className="w-20 h-1 bg-primary/50 dark:bg-primary/30 mx-auto mb-6"></div>
+            <p className="text-base md:text-lg text-brown-dark/80 dark:text-cream-light/90">
               Discover why customers across Rwanda choose us for their premium biscuit needs
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Enhanced Testimonial Cards */}
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+            {/* Update all testimonial cards similarly */}
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
+                  {/* Keep existing image */}
                   <img 
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
                     alt="Sarah Johnson" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary-dark text-cream-light px-4 py-1 rounded-full text-sm">
                   Restaurant Owner
                 </div>
               </div>
               <div className="text-center">
                 <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Sarah Johnson</h3>
-                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                <div className="flex gap-1 text-gold-light dark:text-gold-dark justify-center mb-4">
+                  {/* Keep existing star rating */}
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/90 italic">
                   "The quality and consistency of Kayce's products have made them our go-to supplier. Their customer service is exceptional!"
                 </blockquote>
               </div>
             </div>
 
-            {/* Copy the enhanced testimonial card structure for other testimonials */}
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+            {/* Apply same styling to other testimonial cards */}
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" 
                     alt="Michael Chang" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary-dark text-cream-light px-4 py-1 rounded-full text-sm">
                   Corporate Client
                 </div>
               </div>
               <div className="text-center">
                 <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Michael Chang</h3>
-                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                <div className="flex gap-1 text-gold-light dark:text-gold-dark justify-center mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/90 italic">
                   "Their gift collections are perfect for our corporate events. The presentation and taste never fail to impress our clients and partners."
                 </blockquote>
               </div>
             </div>
 
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
-                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80" 
                     alt="Emma Rodriguez" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-primary to-primary-dark text-cream-light px-4 py-1 rounded-full text-sm">
                   Event Planner
                 </div>
               </div>
               <div className="text-center">
                 <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Emma Rodriguez</h3>
-                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                <div className="flex gap-1 text-gold-light dark:text-gold-dark justify-center mb-4">
                   {[...Array(5)].map((_, i) => (
                     <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
                   ))}
                 </div>
-                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/90 italic">
                   "The variety and quality of their products are unmatched. Their team always goes above and beyond with their service!"
                 </blockquote>
               </div>
@@ -722,11 +730,11 @@ const App = () => {
           {/* Enhanced Partner Logos Section */}
           <div className="mt-20 pt-16 border-t border-brown-dark/10 dark:border-cream-light/10">
             <div className="text-center mb-12">
-              <span className="text-primary font-medium mb-4 inline-block">OUR PARTNERS</span>
+              <span className="text-primary-dark dark:text-primary-light font-medium mb-4 inline-block">OUR PARTNERS</span>
               <h3 className="text-xl md:text-2xl font-serif font-bold text-brown-dark dark:text-cream-light mb-4">
                 Trusted by Leading Businesses
               </h3>
-              <div className="w-16 h-1 bg-primary mx-auto"></div>
+              <div className="w-16 h-1 bg-primary/50 dark:bg-primary/30 mx-auto"></div>
             </div>
             
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
