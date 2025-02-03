@@ -257,7 +257,7 @@ const App = () => {
                 <div className="shrink-0">
                   <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                     <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                     </svg>
                   </div>
                 </div>
@@ -526,109 +526,252 @@ const App = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Enhanced Testimonials Section */}
       <section className="py-16 md:py-24 bg-cream dark:bg-brown relative overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute top-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-gold-light/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        {/* Enhanced Decorative Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/10 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 animate-pulse"></div>
         
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-primary font-medium mb-4 inline-block">TESTIMONIALS</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">
               What Our Customers Say
             </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
             <p className="text-base md:text-lg text-brown-dark/80 dark:text-cream-light/80">
               Discover why customers across Rwanda choose us for their premium biscuit needs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Enhanced Testimonial Cards */}
+            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+              <div className="relative mb-8">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" 
                     alt="Sarah Johnson" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="font-serif font-bold text-lg text-brown-dark dark:text-cream-light">Sarah Johnson</h3>
-                  <p className="text-sm text-brown-dark/60 dark:text-cream-light/60">Restaurant Owner</p>
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                  Restaurant Owner
                 </div>
               </div>
-              <div className="mb-4">
-                <div className="flex gap-1 text-gold-dark">★★★★★</div>
+              <div className="text-center">
+                <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Sarah Johnson</h3>
+                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                  "The quality and consistency of Kayce's products have made them our go-to supplier. Their customer service is exceptional!"
+                </blockquote>
               </div>
-              <blockquote className="text-brown-dark/80 dark:text-cream-light/80">
-                "The quality and consistency of Kayce's products have made them our go-to supplier for all our dessert needs. Their customer service is exceptional!"
-              </blockquote>
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
+            {/* Copy the enhanced testimonial card structure for other testimonials */}
+            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+              <div className="relative mb-8">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" 
                     alt="Michael Chang" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="font-serif font-bold text-lg text-brown-dark dark:text-cream-light">Michael Chang</h3>
-                  <p className="text-sm text-brown-dark/60 dark:text-cream-light/60">Corporate Client</p>
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                  Corporate Client
                 </div>
               </div>
-              <div className="mb-4">
-                <div className="flex gap-1 text-gold-dark">★★★★★</div>
+              <div className="text-center">
+                <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Michael Chang</h3>
+                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                  "Their gift collections are perfect for our corporate events. The presentation and taste never fail to impress our clients and partners."
+                </blockquote>
               </div>
-              <blockquote className="text-brown-dark/80 dark:text-cream-light/80">
-                "Their gift collections are perfect for our corporate events. The presentation and taste never fail to impress our clients and partners."
-              </blockquote>
             </div>
 
-            {/* Testimonial 3 */}
-            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full overflow-hidden">
+            <div className="bg-cream-light/50 dark:bg-brown/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-2xl">
+              <div className="relative mb-8">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80" 
                     alt="Emma Rodriguez" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div>
-                  <h3 className="font-serif font-bold text-lg text-brown-dark dark:text-cream-light">Emma Rodriguez</h3>
-                  <p className="text-sm text-brown-dark/60 dark:text-cream-light/60">Event Planner</p>
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-primary text-cream-light px-4 py-1 rounded-full text-sm">
+                  Event Planner
                 </div>
               </div>
-              <div className="mb-4">
-                <div className="flex gap-1 text-gold-dark">★★★★★</div>
+              <div className="text-center">
+                <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Emma Rodriguez</h3>
+                <div className="flex gap-1 text-gold-dark justify-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-brown-dark/80 dark:text-cream-light/80 italic">
+                  "The variety and quality of their products are unmatched. Their team always goes above and beyond with their service!"
+                </blockquote>
               </div>
-              <blockquote className="text-brown-dark/80 dark:text-cream-light/80">
-                "The variety and quality of their products are unmatched. Their team always goes above and beyond with their service!"
-              </blockquote>
             </div>
           </div>
 
-          {/* Partner Logos */}
-          <div className="mt-16 pt-16 border-t border-brown-dark/10 dark:border-cream-light/10">
-            <h3 className="text-center text-sm uppercase tracking-wider text-brown-dark/60 dark:text-cream-light/60 mb-8">
-              Trusted by Leading Businesses
-            </h3>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
-              <img src="https://placehold.co/120x40/d4c3b3/6b4423?text=PARTNER+1" alt="Partner 1" className="h-8 dark:invert" />
-              <img src="https://placehold.co/120x40/d4c3b3/6b4423?text=PARTNER+2" alt="Partner 2" className="h-8 dark:invert" />
-              <img src="https://placehold.co/120x40/d4c3b3/6b4423?text=PARTNER+3" alt="Partner 3" className="h-8 dark:invert" />
-              <img src="https://placehold.co/120x40/d4c3b3/6b4423?text=PARTNER+4" alt="Partner 4" className="h-8 dark:invert" />
+          {/* Enhanced Partner Logos Section */}
+          <div className="mt-20 pt-16 border-t border-brown-dark/10 dark:border-cream-light/10">
+            <div className="text-center mb-12">
+              <span className="text-primary font-medium mb-4 inline-block">OUR PARTNERS</span>
+              <h3 className="text-xl md:text-2xl font-serif font-bold text-brown-dark dark:text-cream-light mb-4">
+                Trusted by Leading Businesses
+              </h3>
+              <div className="w-16 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+              {/* Enhanced Partner Logo Items */}
+              <div className="group">
+                <img 
+                  src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+1" 
+                  alt="Partner 1" 
+                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                />
+              </div>
+              <div className="group">
+                <img 
+                  src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+2" 
+                  alt="Partner 2" 
+                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                />
+              </div>
+              <div className="group">
+                <img 
+                  src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+3" 
+                  alt="Partner 3" 
+                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                />
+              </div>
+              <div className="group">
+                <img 
+                  src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+4" 
+                  alt="Partner 4" 
+                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact Section - Better padding */}
+      {/* Refined CTA Section */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Background with parallax effect */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-brown-darkest/95 to-brown-dark/90"></div>
+          <img 
+            src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=2070&q=80" 
+            alt="Background" 
+            className="w-full h-full object-cover object-center scale-110"
+          />
+        </div>
+
+        {/* Enhanced glass morphism overlay */}
+        <div className="absolute inset-0 backdrop-blur-sm bg-brown-darkest/20"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            {/* Refined decorative element */}
+            <div className="inline-flex items-center gap-3 mb-8 bg-primary/20 px-6 py-2 rounded-full backdrop-blur-sm border border-cream-light/10">
+              <span className="text-cream-light/90 uppercase text-sm tracking-wider font-medium">Experience Excellence</span>
+            </div>
+
+            {/* Main content with enhanced typography */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-cream-light mb-8 leading-tight">
+              Elevate Your<br className="hidden sm:block"/>Moments with Us
+            </h2>
+            <p className="text-lg md:text-xl text-cream-light/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Join thousands of satisfied customers who trust us for their premium biscuit and cookie needs.
+            </p>
+
+            {/* Enhanced CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+              <a 
+                href="#contact" 
+                className="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-dark text-cream-light rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl group transform hover:-translate-y-0.5"
+              >
+                <span className="mr-2">Get Started Today</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a 
+                href="#products" 
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-cream-light/80 text-cream-light hover:bg-cream-light/10 rounded-xl transition-all duration-300 group transform hover:-translate-y-0.5"
+              >
+                View Products
+              </a>
+            </div>
+
+            {/* Enhanced Features Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {/* Quality Feature */}
+              <div className="group p-6 rounded-xl bg-brown-dark/30 backdrop-blur-sm hover:bg-brown-dark/40 transition-all">
+                <div className="mb-4 mx-auto w-12 h-12 bg-primary/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-serif font-bold mb-2 text-cream-light">Premium Quality</h3>
+                <p className="text-sm text-cream-light/80 leading-relaxed">
+                  Finest ingredients and expert craftsmanship in every product
+                </p>
+              </div>
+
+              {/* Delivery Feature */}
+              <div className="group p-6 rounded-xl bg-brown-dark/30 backdrop-blur-sm hover:bg-brown-dark/40 transition-all">
+                <div className="mb-4 mx-auto w-12 h-12 bg-primary/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-serif font-bold mb-2 text-cream-light">Fast Delivery</h3>
+                <p className="text-sm text-cream-light/80 leading-relaxed">
+                  Swift and reliable nationwide delivery service
+                </p>
+              </div>
+
+              {/* Service Feature */}
+              <div className="group p-6 rounded-xl bg-brown-dark/30 backdrop-blur-sm hover:bg-brown-dark/40 transition-all">
+                <div className="mb-4 mx-auto w-12 h-12 bg-primary/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-serif font-bold mb-2 text-cream-light">Premium Service</h3>
+                <p className="text-sm text-cream-light/80 leading-relaxed">
+                  24/7 dedicated support for all your needs
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
       <section id="contact" className="py-12 md:py-16 bg-cream-light dark:bg-brown-darkest">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-3xl font-serif font-bold mb-3 md:mb-4 text-brown-dark dark:text-cream-light">
