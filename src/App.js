@@ -63,13 +63,13 @@ const App = () => {
     startCounting(statsRef);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add form submission logic here
+    console.log('Form submitted');
+  };
+
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
-      {/* Enhanced Hero Section */}
-      <section className="relative min-h-screen">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-brown-darkest/80 to-brown-dark/60 z-10"></div>
           <img 
