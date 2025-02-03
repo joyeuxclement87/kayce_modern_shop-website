@@ -3,6 +3,14 @@ import React, { useState } from 'react';
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const navLinks = [
+    { href: "#who-we-are", text: "Who We Are" },
+    { href: "#products", text: "Products" },
+    { href: "#testimonials", text: "Testimonials" },
+    { href: "#faq", text: "FAQ" },
+    { href: "#contact", text: "Contact" },
+  ];
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 px-4 py-2 md:py-3 transition-all ${
       darkMode ? 'bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'
@@ -14,9 +22,15 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         
         <div className="flex items-center gap-3 md:gap-6">
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#who-we-are" className="hover:text-primary transition-colors text-base">Who We Are</a>
-            <a href="#products" className="hover:text-primary transition-colors text-base">Products</a>
-            <a href="#contact" className="hover:text-primary transition-colors text-base">Contact</a>
+            {navLinks.map((link, index) => (
+              <a 
+                key={index}
+                href={link.href} 
+                className="hover:text-primary transition-colors text-base"
+              >
+                {link.text}
+              </a>
+            ))}
           </div>
           
           <button 
@@ -38,22 +52,20 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         </div>
       </div>
 
-      {/* Mobile menu - Improved transitions and spacing */}
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden border-t border-cream-dark dark:border-brown-dark animate-fadeIn">
           <div className="py-2">
-            <a href="#who-we-are" 
-               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
-              Who We Are
-            </a>
-            <a href="#products" 
-               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
-              Products
-            </a>
-            <a href="#contact" 
-               className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm">
-              Contact
-            </a>
+            {navLinks.map((link, index) => (
+              <a 
+                key={index}
+                href={link.href} 
+                className="block px-4 py-2.5 hover:bg-cream-dark dark:hover:bg-brown transition-colors text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.text}
+              </a>
+            ))}
           </div>
         </div>
       )}

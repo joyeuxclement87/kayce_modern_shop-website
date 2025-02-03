@@ -19,6 +19,8 @@ const App = () => {
   });
 
   const startCounting = (targetRef) => {
+    if (!targetRef.current) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -31,7 +33,15 @@ const App = () => {
       { threshold: 0.5 }
     );
 
+    // Only observe if the ref exists
     observer.observe(targetRef.current);
+
+    // Cleanup observer on unmount
+    return () => {
+      if (targetRef.current) {
+        observer.unobserve(targetRef.current);
+      }
+    };
   };
 
   const animate = () => {
@@ -60,16 +70,33 @@ const App = () => {
   const statsRef = React.useRef(null);
 
   useEffect(() => {
-    startCounting(statsRef);
+    // Add a small delay to ensure the ref is mounted
+    const timer = setTimeout(() => {
+      if (statsRef.current) {
+        startCounting(statsRef);
+      }
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // Add state for FAQ accordions
+  const [activeQuestion, setActiveQuestion] = useState(null);
+  const [faqHeights, setFaqHeights] = useState({});
+  
+  // Add FAQ ref
+  const faqRefs = React.useRef({});
+
+  const toggleQuestion = (index) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
+  };
 
   return (
     <div className={`min-h-screen ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       
-      {/* Enhanced Hero Section */}
+      {/* Enhanced Hero Section - Updated Copy */}
       <section className="relative min-h-screen">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-brown-darkest/80 to-brown-dark/60 z-10"></div>
           <img 
@@ -80,62 +107,50 @@ const App = () => {
           />
         </div>
 
-        {/* Content Container */}
         <div className="relative z-10 container mx-auto px-4 h-screen flex items-center justify-start">
           <div className="max-w-2xl lg:max-w-3xl backdrop-blur-sm bg-brown-darkest/40 p-6 md:p-8 rounded-lg">
-            {/* Main Headline */}
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 text-cream-light leading-tight">
-              Premium Biscuits and Cookies Delivered to Your Doorstep
+              Premium Biscuits and Cookies for Rwanda
             </h1>
             
-            {/* Subheadline */}
             <p className="text-base md:text-lg mb-6 md:mb-8 text-cream-light/90 font-light">
-              We import, supply, and sell the finest biscuits and cookies in Rwanda, bringing you a taste of excellence in every bite.
+              We import, supply, and sell the finest biscuits and cookies to retailers, wholesalers, and individual customers, delivering excellence in every bite.
             </p>
             
-            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="#products" 
+                href="#contact" 
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-medium bg-primary hover:bg-primary-dark text-cream-light rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
               >
-                Explore Our Products
+                Contact Us Today!
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </a>
               
               <a 
-                href="#contact" 
+                href="#products" 
                 className="inline-flex items-center justify-center px-6 py-3 text-base font-medium border-2 border-cream-light text-cream-light hover:bg-cream-light hover:text-brown-dark rounded-lg transition-all duration-300"
               >
-                Contact Us
+                View Our Products
               </a>
             </div>
 
-            {/* Feature Points */}
             <div className="mt-8 md:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-cream-light/90 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-gold-light">✓</span>
-                <span>Premium Quality</span>
-              </div>
               <div className="flex items-center gap-2">
                 <span className="text-gold-light">✓</span>
                 <span>Nationwide Delivery</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-gold-light">✓</span>
-                <span>Bulk Orders</span>
+                <span>Bulk Orders Welcome</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gold-light">✓</span>
+                <span>Premium Quality</span>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-          <svg className="w-5 h-5 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
         </div>
       </section>
 
@@ -200,142 +215,111 @@ const App = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section - Redesigned */}
-      <section id="why-choose-us" className="py-16 md:py-24 bg-cream-light dark:bg-brown-darkest">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">
-              Why Choose Us
+      {/* Why Choose Us Section - Enhanced */}
+      <section id="why-choose-us" className="py-16 md:py-24 bg-cream-light dark:bg-brown-darkest relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/5 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2"></div>
+
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-primary font-medium mb-4 inline-block">WHY CHOOSE US</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
+              The Kayce Difference
             </h2>
             <p className="text-base md:text-lg text-brown-dark/80 dark:text-cream-light/80">
-              We take pride in delivering excellence in every aspect of our service
+              Experience excellence in every aspect of our service, from product quality to delivery
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-            {/* Premium Quality */}
-            <div className="group bg-cream/50 dark:bg-brown/50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
-              <div className="flex items-start space-x-4">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Premium Quality</h3>
-                  <p className="text-sm text-brown-dark/80 dark:text-cream-light/80 leading-relaxed">
-                    We partner with renowned manufacturers and use only the finest ingredients to ensure exceptional taste in every bite.
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {/* Premium Quality Card */}
+            <div className="group bg-cream/50 dark:bg-brown/50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <svg className="w-8 h-8 text-primary group-hover:text-cream-light transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3 className="text-xl font-serif font-bold mb-3 text-brown-dark dark:text-cream-light">Premium Quality</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Carefully selected, imported products meeting the highest quality standards
+              </p>
             </div>
 
-            {/* Fast Delivery */}
-            <div className="group bg-cream/50 dark:bg-brown/50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
-              <div className="flex items-start space-x-4">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Fast Delivery</h3>
-                  <p className="text-sm text-brown-dark/80 dark:text-cream-light/80 leading-relaxed">
-                    Our efficient delivery network ensures your orders reach you fresh and on time, anywhere in Rwanda.
-                  </p>
-                </div>
+            {/* Competitive Pricing Card */}
+            <div className="group bg-cream/50 dark:bg-brown/50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <svg className="w-8 h-8 text-primary group-hover:text-cream-light transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3 className="text-xl font-serif font-bold mb-3 text-brown-dark dark:text-cream-light">Best Value</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Competitive pricing without compromising on quality or service
+              </p>
             </div>
 
-            {/* Customer Service */}
-            <div className="group bg-cream/50 dark:bg-brown/50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all">
-              <div className="flex items-start space-x-4">
-                <div className="shrink-0">
-                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                    </svg>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Premium Service</h3>
-                  <p className="text-sm text-brown-dark/80 dark:text-cream-light/80 leading-relaxed">
-                    Our dedicated team ensures personalized attention and 100% satisfaction with every order.
-                  </p>
-                </div>
+            {/* Fast Delivery Card */}
+            <div className="group bg-cream/50 dark:bg-brown/50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <svg className="w-8 h-8 text-primary group-hover:text-cream-light transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
               </div>
+              <h3 className="text-xl font-serif font-bold mb-3 text-brown-dark dark:text-cream-light">Swift Delivery</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Reliable nationwide delivery network ensuring timely order fulfillment
+              </p>
+            </div>
+
+            {/* Customer Service Card */}
+            <div className="group bg-cream/50 dark:bg-brown/50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="mb-6 w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                <svg className="w-8 h-8 text-primary group-hover:text-cream-light transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-bold mb-3 text-brown-dark dark:text-cream-light">Expert Support</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Dedicated customer service team available to assist you 24/7
+              </p>
             </div>
           </div>
 
-          {/* Stats Section - Enhanced with cards and colors */}
-          <div 
-            ref={statsRef}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto pt-12 mt-12"
-          >
-            {/* Customers Card */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-primary to-brown-dark p-8 rounded-2xl shadow-xl group hover:scale-105 transition-all">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-cream-light/10 rounded-full blur-2xl"></div>
-              <div className="relative">
-                <div className="text-4xl xl:text-5xl font-bold text-cream-light mb-2 font-serif">
-                  {counters.customers.toLocaleString()}+
+          {/* Additional Benefits */}
+          <div className="mt-16 max-w-4xl mx-auto bg-cream/30 dark:bg-brown/30 rounded-2xl p-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
                 </div>
-                <div className="text-sm uppercase tracking-wider text-cream-light/80 font-medium">
-                  Happy Customers
-                </div>
-                <div className="absolute -bottom-6 -right-6 text-cream-light/10 text-[80px] font-bold leading-none">
-                  5K
+                <div>
+                  <h4 className="font-bold text-brown-dark dark:text-cream-light">Quality Guarantee</h4>
+                  <p className="text-sm text-brown-dark/70 dark:text-cream-light/70">100% satisfaction or money back</p>
                 </div>
               </div>
-            </div>
-
-            {/* Products Card */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-gold-light to-gold-dark p-8 rounded-2xl shadow-xl group hover:scale-105 transition-all">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-cream-light/10 rounded-full blur-2xl"></div>
-              <div className="relative">
-                <div className="text-4xl xl:text-5xl font-bold text-brown-darkest mb-2 font-serif">
-                  {counters.products}+
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
-                <div className="text-sm uppercase tracking-wider text-brown-darkest/80 font-medium">
-                  Product Varieties
-                </div>
-                <div className="absolute -bottom-6 -right-6 text-brown-darkest/10 text-[80px] font-bold leading-none">
-                  50
+                <div>
+                  <h4 className="font-bold text-brown-dark dark:text-cream-light">Same Day Delivery</h4>
+                  <p className="text-sm text-brown-dark/70 dark:text-cream-light/70">For orders before 2 PM</p>
                 </div>
               </div>
-            </div>
-
-            {/* Satisfaction Card */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-brown-light to-brown p-8 rounded-2xl shadow-xl group hover:scale-105 transition-all">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-cream-light/10 rounded-full blur-2xl"></div>
-              <div className="relative">
-                <div className="text-4xl xl:text-5xl font-bold text-cream-light mb-2 font-serif">
-                  {counters.satisfaction}%
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
                 </div>
-                <div className="text-sm uppercase tracking-wider text-cream-light/80 font-medium">
-                  Satisfaction Rate
-                </div>
-                <div className="absolute -bottom-6 -right-6 text-cream-light/10 text-[80px] font-bold leading-none">
-                  98
-                </div>
-              </div>
-            </div>
-
-            {/* Support Card */}
-            <div className="relative overflow-hidden bg-gradient-to-br from-primary-dark to-brown-darkest p-8 rounded-2xl shadow-xl group hover:scale-105 transition-all">
-              <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-cream-light/10 rounded-full blur-2xl"></div>
-              <div className="relative">
-                <div className="text-4xl xl:text-5xl font-bold text-cream-light mb-2 font-serif">
-                  {counters.support}/7
-                </div>
-                <div className="text-sm uppercase tracking-wider text-cream-light/80 font-medium">
-                  Customer Support
-                </div>
-                <div className="absolute -bottom-6 -right-6 text-cream-light/10 text-[80px] font-bold leading-none">
-                  24
+                <div>
+                  <h4 className="font-bold text-brown-dark dark:text-cream-light">Bulk Discounts</h4>
+                  <p className="text-sm text-brown-dark/70 dark:text-cream-light/70">Special rates for large orders</p>
                 </div>
               </div>
             </div>
@@ -343,61 +327,164 @@ const App = () => {
         </div>
       </section>
 
-      {/* New About Us Section */}
+      {/* Enhanced About Us Section */}
       <section id="about" className="py-16 md:py-24 bg-cream dark:bg-brown">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Image Column */}
-            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1556217477-d325251ece38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
-                alt="Our artisanal bakery process" 
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
-            </div>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-primary font-medium mb-4 inline-block">OUR STORY</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
+              About Kayce Modern Shop
+            </h2>
+            <p className="text-lg text-brown-dark/80 dark:text-cream-light/80">
+              A journey of excellence in premium biscuits and cookies since 2015
+            </p>
+          </div>
 
-            {/* Content Column */}
-            <div className="lg:pl-8">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
-                Our Story
-              </h2>
-              
-              <div className="space-y-4 text-brown-dark/90 dark:text-cream-light/90">
-                <p className="text-lg leading-relaxed">
-                  Since 2015, Kayce Modern Shop has been Rwanda's premier destination for premium biscuits and cookies. What started as a small family-owned business has grown into a nationally recognized brand, serving customers across the country.
-                </p>
-                
-                <p className="text-lg leading-relaxed">
-                  Our mission is simple: to bring joy through exceptional baked goods while maintaining the highest standards of quality and customer service.
-                </p>
-
-                {/* Value Propositions */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary p-3 rounded-full">
-                      <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Quality First</h3>
-                      <p className="text-brown-dark/80 dark:text-cream-light/80">Only the finest ingredients make it into our products</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary p-3 rounded-full">
-                      <svg className="w-6 h-6 text-cream-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-serif font-bold text-lg mb-2 text-brown-dark dark:text-cream-light">Timely Delivery</h3>
-                      <p className="text-brown-dark/80 dark:text-cream-light/80">Fresh and on-time delivery guaranteed</p>
-                    </div>
+          {/* History Timeline */}
+          <div className="relative max-w-4xl mx-auto mb-20">
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-primary/20"></div>
+            
+            <div className="space-y-12">
+              {/* 2015 */}
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="md:text-right">
+                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2015</h3>
+                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                      Founded in Kigali with a vision to bring premium international biscuits to Rwanda
+                    </p>
                   </div>
                 </div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div className="hidden md:block"></div>
+              </div>
+
+              {/* 2018 */}
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="hidden md:block"></div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div>
+                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2018</h3>
+                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                      Expanded operations nationwide, becoming Rwanda's leading premium biscuit supplier
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* 2023 */}
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="md:text-right">
+                  <div className="bg-cream-light dark:bg-brown-dark p-6 rounded-lg shadow-lg">
+                    <h3 className="text-xl font-serif font-bold mb-2 text-primary">2023</h3>
+                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                      Achieved milestone of serving over 5,000 satisfied customers across the country
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute left-1/2 top-6 transform -translate-x-1/2 w-4 h-4 rounded-full bg-primary"></div>
+                <div className="hidden md:block"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Core Values */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-20">
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Excellence</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Committed to delivering the highest quality products and service in every interaction
+              </p>
+            </div>
+
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Innovation</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Continuously exploring new products and ways to serve our customers better
+              </p>
+            </div>
+
+            <div className="text-center p-6">
+              <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-xl flex items-center justify-center">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">Customer First</h3>
+              <p className="text-brown-dark/80 dark:text-cream-light/80">
+                Putting our customers' needs at the heart of everything we do
+              </p>
+            </div>
+          </div>
+
+          {/* Team Section */}
+          <div className="max-w-5xl mx-auto">
+            <h3 className="text-2xl font-serif font-bold text-center mb-12 text-brown-dark dark:text-cream-light">
+              Meet Our Leadership Team
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Team Member 1 */}
+              <div className="text-center">
+                <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" 
+                    alt="John Smith" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
+                </div>
+                <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">John Smith</h4>
+                <p className="text-primary font-medium mb-3">Founder & CEO</p>
+                <p className="text-sm text-brown-dark/80 dark:text-cream-light/80">
+                  20+ years of experience in international food distribution
+                </p>
+              </div>
+
+              {/* Team Member 2 */}
+              <div className="text-center">
+                <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80" 
+                    alt="Sarah Johnson" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
+                </div>
+                <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Sarah Johnson</h4>
+                <p className="text-primary font-medium mb-3">Operations Director</p>
+                <p className="text-sm text-brown-dark/80 dark:text-cream-light/80">
+                  Expert in supply chain management and quality control
+                </p>
+              </div>
+
+              {/* Team Member 3 */}
+              <div className="text-center">
+                <div className="relative w-48 h-48 mx-auto mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" 
+                    alt="Michael Chen" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brown-dark/50 to-transparent"></div>
+                </div>
+                <h4 className="text-lg font-serif font-bold mb-2 text-brown-dark dark:text-cream-light">Michael Chen</h4>
+                <p className="text-primary font-medium mb-3">Customer Relations</p>
+                <p className="text-sm text-brown-dark/80 dark:text-cream-light/80">
+                  Dedicated to ensuring exceptional customer experience
+                </p>
               </div>
             </div>
           </div>
@@ -673,6 +760,116 @@ const App = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 md:py-24 bg-cream-light dark:bg-brown-darkest relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold-light/5 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
+
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-primary font-medium mb-4 inline-block">FAQ</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-base md:text-lg text-brown-dark/80 dark:text-cream-light/80">
+              Find answers to commonly asked questions about our products and services
+            </p>
+          </div>
+
+          <div className="max-w-3xl mx-auto space-y-4">
+            {[
+              {
+                question: "Where do you source your products?",
+                answer: "We import our premium biscuits and cookies from renowned manufacturers in Europe and Asia, ensuring the highest quality standards. Each product is carefully selected and undergoes strict quality control before reaching our customers."
+              },
+              {
+                question: "Do you offer bulk discounts?",
+                answer: "Yes! We offer attractive discounts for bulk orders. The discount rate varies based on order quantity. For corporate orders and large events, please contact our sales team for a customized quote."
+              },
+              {
+                question: "What areas do you deliver to?",
+                answer: "We provide nationwide delivery across Rwanda, with same-day delivery available in Kigali for orders placed before 2 PM. Delivery times for other regions typically range from 1-3 business days."
+              },
+              {
+                question: "How can I place an order?",
+                answer: "You can place an order through multiple channels: Call us directly, email us, use our website contact form, or visit our shop in Kimihurura. For bulk orders, we recommend contacting our sales team directly to discuss your requirements."
+              },
+              {
+                question: "What is your return policy?",
+                answer: "We have a 100% satisfaction guarantee. If you're not satisfied with your purchase, please contact us within 24 hours of delivery, and we'll replace the product or offer a full refund."
+              },
+              {
+                question: "Do you offer custom packaging for events?",
+                answer: "Yes, we provide custom packaging solutions for corporate events, weddings, and special occasions. Contact us at least one week in advance to discuss your customization requirements."
+              }
+            ].map((faq, index) => (
+              <div 
+                key={index}
+                className="bg-cream/50 dark:bg-brown/50 rounded-xl overflow-hidden"
+              >
+                <button
+                  className="w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none"
+                  onClick={() => toggleQuestion(index)}
+                  aria-expanded={activeQuestion === index}
+                  aria-controls={`faq-answer-${index}`}
+                >
+                  <span className="font-serif font-bold text-lg text-brown-dark dark:text-cream-light">
+                    {faq.question}
+                  </span>
+                  <svg
+                    className={`w-6 h-6 text-primary transition-transform duration-300 ${
+                      activeQuestion === index ? 'transform rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <div
+                  id={`faq-answer-${index}`}
+                  ref={el => faqRefs.current[index] = el}
+                  className={`transition-all duration-300 ease-in-out overflow-hidden`}
+                  style={{
+                    maxHeight: activeQuestion === index ? `${faqRefs.current[index]?.scrollHeight}px` : '0',
+                    opacity: activeQuestion === index ? 1 : 0,
+                  }}
+                >
+                  <div className="px-6 pb-4">
+                    <p className="text-brown-dark/80 dark:text-cream-light/80">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Help */}
+          <div className="mt-12 text-center">
+            <p className="text-brown-dark/80 dark:text-cream-light/80 mb-4">
+              Still have questions? We're here to help!
+            </p>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors"
+            >
+              Contact our support team
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
