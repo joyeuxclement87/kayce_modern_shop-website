@@ -72,4 +72,11 @@ module.exports = {
     },
   },
   plugins: [],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
+  // Add base URL for GitHub Pages
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/kayce_modern_shop-website/'
+    : '/',
 }
