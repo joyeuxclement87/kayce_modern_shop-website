@@ -100,7 +100,7 @@ const App = () => {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-brown-darkest/80 to-brown-dark/60 z-10"></div>
           <img 
-            src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80" 
+            src={`${process.env.PUBLIC_URL}/images/hero-image.jpg`} 
             alt="Premium cookies and biscuits" 
             className="w-full h-full object-cover object-center"
             loading="eager"
