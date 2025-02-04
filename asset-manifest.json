@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/kayce_modern_shop-website/static/css/main.47514172.css",
-    "main.js": "/kayce_modern_shop-website/static/js/main.157583d6.js",
+    "main.css": "/kayce_modern_shop-website/static/css/main.fe8612ed.css",
+    "main.js": "/kayce_modern_shop-website/static/js/main.f2549d24.js",
     "index.html": "/kayce_modern_shop-website/index.html",
-    "main.47514172.css.map": "/kayce_modern_shop-website/static/css/main.47514172.css.map",
-    "main.157583d6.js.map": "/kayce_modern_shop-website/static/js/main.157583d6.js.map"
+    "main.fe8612ed.css.map": "/kayce_modern_shop-website/static/css/main.fe8612ed.css.map",
+    "main.f2549d24.js.map": "/kayce_modern_shop-website/static/js/main.f2549d24.js.map"
   },
   "entrypoints": [
-    "static/css/main.47514172.css",
-    "static/js/main.157583d6.js"
+    "static/css/main.fe8612ed.css",
+    "static/js/main.f2549d24.js"
   ]
 }
