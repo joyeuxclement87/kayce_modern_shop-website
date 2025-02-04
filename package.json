@@ -1,8 +1,8 @@
 {
-  "name": "kayce_modern_shop-website",
-  "version": "0.1.0",
+  "name": "kayce_modern_shop-website-1",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://joyeuxclement87.github.io/kayce_modern_shop-website",
+  "homepage": "https://yourusername.github.io/kayce_modern_shop-website-1",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

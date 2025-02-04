@@ -1,47 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles.css';
 import Navbar from './components/Navbar';
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    document.documentElement.classList.toggle('dark');
-  };
-
-  // Add this counter state and animation
+  const [activeQuestion, setActiveQuestion] = useState(null);
   const [counters, setCounters] = useState({
     customers: 0,
     products: 0,
     satisfaction: 0,
     support: 0
   });
+  
+  const statsRef = useRef(null);
+  const faqRefs = useRef([]);
 
-  const startCounting = (targetRef) => {
-    if (!targetRef.current) return;
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark');
+  };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animate();
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    // Only observe if the ref exists
-    observer.observe(targetRef.current);
-
-    // Cleanup observer on unmount
-    return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
-      }
-    };
+  const toggleQuestion = (index) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
   };
 
   const animate = () => {
@@ -58,7 +38,7 @@ const App = () => {
         customers: Math.round(progress * 5000),
         products: Math.round(progress * 50),
         satisfaction: Math.round(progress * 98),
-        support: 24 // This doesn't need animation
+        support: 24
       });
 
       if (currentStep >= steps) {
@@ -67,7 +47,29 @@ const App = () => {
     }, interval);
   };
 
-  const statsRef = React.useRef(null);
+  const startCounting = (targetRef) => {
+    if (!targetRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate();
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(targetRef.current);
+
+    return () => {
+      if (targetRef.current) {
+        observer.unobserve(targetRef.current);
+      }
+    };
+  };
 
   useEffect(() => {
     // Add a small delay to ensure the ref is mounted
@@ -80,33 +82,12 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Add state for FAQ accordions
-  const [activeQuestion, setActiveQuestion] = useState(null);
-  const [faqHeights, setFaqHeights] = useState({});
-  
-  // Add FAQ ref
-  const faqRefs = React.useRef({});
-
-  const toggleQuestion = (index) => {
-    setActiveQuestion(activeQuestion === index ? null : index);
-  };
-
-  return ( 
+  return (
     <div className={`min-h-screen pt-[104px] ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} className="fixed top-0 left-0 right-0 z-50" />
       
-      {/* Enhanced Hero Section - Updated Copy */}
-      <section className="relative min-h-[calc(100vh-104px)] md:min-h-screen">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-brown-darkest/80 to-brown-dark/60 z-10"></div>
-          <img 
-            src={`${process.env.PUBLIC_URL}/images/hero-image.jpg`} 
-            alt="Premium cookies and biscuits" 
-            className="w-full h-full object-cover object-center"
-            loading="eager"
-          />
-        </div>
-
+      {/* Hero Section */}
+      <section id="hero" className="relative z-10">
         <div className="relative z-10 container mx-auto px-3 sm:px-4 h-[calc(100vh-104px)] md:h-screen flex items-center justify-start">
           <div className="max-w-[90%] w-full sm:max-w-2xl lg:max-w-3xl backdrop-blur-sm bg-brown-darkest/40 p-3 sm:p-6 md:p-8 rounded-lg">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4 md:mb-6 text-cream-light leading-tight">
@@ -514,7 +495,7 @@ const App = () => {
             <div className="bg-cream-light dark:bg-brown rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group">
               <div className="relative h-48 sm:h-64 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80" 
+                  src={process.env.PUBLIC_URL + "/assets/images/product1.jpg"}
                   alt="Premium Cookies" 
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                 />
@@ -948,240 +929,4 @@ const App = () => {
 
           <div className="max-w-2xl mx-auto">
             {/* Quick Contact */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <a 
-                href="mailto:contact@kayceshop.com" 
-                className="flex flex-col items-center p-6 rounded-xl hover:bg-cream/50 dark:hover:bg-brown/50 transition-colors"
-              >
-                <div className="w-12 h-12 mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <span className="text-brown-dark dark:text-cream-light font-medium">Email Us</span>
-                <span className="text-sm text-brown-dark/60 dark:text-cream-light/60">contact@kayceshop.com</span>
-              </a>
-
-              <a 
-                href="tel:+250788123456" 
-                className="flex flex-col items-center p-6 rounded-xl hover:bg-cream/50 dark:hover:bg-brown/50 transition-colors"
-              >
-                <div className="w-12 h-12 mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <span className="text-brown-dark dark:text-cream-light font-medium">Call Us</span>
-                <span className="text-sm text-brown-dark/60 dark:text-cream-light/60">+250 788 123 456</span>
-              </a>
-
-              <div className="flex flex-col items-center p-6 rounded-xl hover:bg-cream/50 dark:hover:bg-brown/50 transition-colors">
-                <div className="w-12 h-12 mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-                  <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <span className="text-brown-dark dark:text-cream-light font-medium">Visit Us</span>
-                <span className="text-sm text-brown-dark/60 dark:text-cream-light/60 text-center">KG 123 St, Kimihurura<br/>Kigali, Rwanda</span>
-              </div>
-            </div>
-
-            {/* Minimal Contact Form */}
-            <form className="space-y-4 sm:space-y-6 bg-cream/50 dark:bg-brown/50 p-3 sm:p-6 md:p-8 rounded-xl">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-4 py-3 rounded-lg bg-cream-light dark:bg-brown-dark text-brown-dark dark:text-cream-light border-none focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-4 py-3 rounded-lg bg-cream-light dark:bg-brown-dark text-brown-dark dark:text-cream-light border-none focus:outline-none focus:ring-2 focus:ring-primary"
-                  required
-                />
-              </div>
-              <textarea
-                placeholder="Message"
-                rows="4"
-                className="w-full px-4 py-3 rounded-lg bg-cream-light dark:bg-brown-dark text-brown-dark dark:text-cream-light border-none focus:outline-none focus:ring-2 focus:ring-primary"
-                required
-              ></textarea>
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-primary hover:bg-primary-dark text-cream-light rounded-lg transition-all duration-300 transform hover:-translate-y-0.5"
-              >
-                Send Message
-              </button>
-            </form>
-
-            {/* Social Links */}
-            <div className="flex justify-center gap-3 sm:gap-4 mt-8 sm:mt-12">
-              <a 
-                href="https://facebook.com" 
-                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-cream-light flex items-center justify-center transition-all duration-300"
-                aria-label="Facebook"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.77,7.46H14.55V10.24H18.77V14.47H14.55V27.93H9.28V14.47H6V10.24H9.28V7.46C9.28,4.91 10.96,2.77 14.55,2.77H18.77V7.46M12,0C5.37,0 0,5.37 0,12C0,18.63 5.37,24 12,24C18.63,24 24,18.63 24,12C24,5.37 18.63,0 12,0Z"/>
-                </svg>
-              </a>
-              <a 
-                href="https://instagram.com" 
-                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-cream-light flex items-center justify-center transition-all duration-300"
-                aria-label="Instagram"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,0C5.37,0 0,5.37 0,12C0,18.63 5.37,24 12,24C18.63,24 24,18.63 24,12C24,5.37 18.63,0 12,0M17.75,2H6.25C3.9,2 2,3.9 2,6.25V17.75C2,20.1 3.9,22 6.25,22H17.75C20.1,22 22,20.1 22,17.75V6.25C22,3.9 20.1,2 17.75,2M12,7.07C14.84,7.07 17.13,9.36 17.13,12.2C17.13,15.04 14.84,17.33 12,17.33C9.16,17.33 6.87,15.04 6.87,12.2C6.87,9.36 9.16,7.07 12,7.07M12,15.82C14.03,15.82 15.67,14.18 15.67,12.15C15.67,10.12 14.03,8.48 12,8.48C9.97,8.48 8.33,10.12 8.33,12.15C8.33,14.18 9.97,15.82 12,15.82Z"/>
-                </svg>
-              </a>
-              <a 
-                href="https://twitter.com" 
-                className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-cream-light flex items-center justify-center transition-all duration-300"
-                aria-label="Twitter"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer Section */}
-      <footer className="bg-brown-darkest text-cream-light/80 py-8 sm:py-12 md:py-16">
-        <div className="container mx-auto px-3 sm:px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
-            {/* Company Info */}
-            <div>
-              <a href="/" className="text-2xl font-serif font-bold text-primary hover:text-primary-dark transition-colors inline-block mb-6">
-                Kayce Shop
-              </a>
-              <p className="text-sm leading-relaxed mb-6">
-                Premium biscuits and cookies supplier in Rwanda, delivering excellence in every bite since 2015.
-              </p>
-              <div className="flex gap-4">
-                <a 
-                  href="https://facebook.com" 
-                  className="w-8 h-8 rounded-full bg-brown-dark hover:bg-primary transition-colors flex items-center justify-center"
-                  aria-label="Facebook"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.77,7.46H14.55V10.24H18.77V14.47H14.55V27.93H9.28V14.47H6V10.24H9.28V7.46C9.28,4.91 10.96,2.77 14.55,2.77H18.77V7.46M12,0C5.37,0 0,5.37 0,12C0,18.63 5.37,24 12,24C18.63,24 24,18.63 24,12C24,5.37 18.63,0 12,0Z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://instagram.com" 
-                  className="w-8 h-8 rounded-full bg-brown-dark hover:bg-primary transition-colors flex items-center justify-center"
-                  aria-label="Instagram"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12,0C5.37,0 0,5.37 0,12C0,18.63 5.37,24 12,24C18.63,24 24,18.63 24,12C24,5.37 18.63,0 12,0M17.75,2H6.25C3.9,2 2,3.9 2,6.25V17.75C2,20.1 3.9,22 6.25,22H17.75C20.1,22 22,20.1 22,17.75V6.25C22,3.9 20.1,2 17.75,2M12,7.07C14.84,7.07 17.13,9.36 17.13,12.2C17.13,15.04 14.84,17.33 12,17.33C9.16,17.33 6.87,15.04 6.87,12.2C6.87,9.36 9.16,7.07 12,7.07M12,15.82C14.03,15.82 15.67,14.18 15.67,12.15C15.67,10.12 14.03,8.48 12,8.48C9.97,8.48 8.33,10.12 8.33,12.15C8.33,14.18 9.97,15.82 12,15.82Z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://twitter.com" 
-                  className="w-8 h-8 rounded-full bg-brown-dark hover:bg-primary transition-colors flex items-center justify-center"
-                  aria-label="Twitter"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/>
-                  </svg>
-                </a>
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-lg font-serif font-bold text-cream-light mb-6">Quick Links</h3>
-              <ul className="space-y-4">
-                <li>
-                  <a href="#who-we-are" className="hover:text-primary transition-colors">About Us</a>
-                </li>
-                <li>
-                  <a href="#products" className="hover:text-primary transition-colors">Our Products</a>
-                </li>
-                <li>
-                  <a href="#contact" className="hover:text-primary transition-colors">Contact Us</a>
-                </li>
-                <li>
-                  <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h3 className="text-lg font-serif font-bold text-cream-light mb-6">Contact</h3>
-              <ul className="space-y-4">
-                <li className="flex items-center gap-2">
-                  <svg className="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span>KG 123 St, Kimihurura, Kigali, Rwanda</span>
-                </li>
-                <li>
-                  <a href="tel:+250788123456" className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <svg className="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span>+250 788 123 456</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:contact@kayceshop.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-                    <svg className="w-5 h-5 text-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span>contact@kayceshop.com</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Opening Hours */}
-            <div>
-              <h3 className="text-lg font-serif font-bold text-cream-light mb-6">Opening Hours</h3>
-              <ul className="space-y-4">
-                <li className="flex justify-between">
-                  <span>Monday - Friday:</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span>9:00 AM - 5:00 PM</span>
-                </li>
-                <li className="flex justify-between">
-                  <span>Sunday:</span>
-                  <span>Closed</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar */}
-          <div className="pt-8 mt-8 border-t border-brown-dark/30">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-              <div className="text-sm">
-                © {new Date().getFullYear()} Kayce Modern Shop. All rights reserved.
-              </div>
-              <div className="flex gap-6 text-sm md:justify-end">
-                <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
-                <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
-                <a href="/cookies-policy" className="hover:text-primary transition-colors">Cookies Policy</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      {/* End of content */}
-    </div>
-  );
-};
-
-export default App;
+            <div className="grid grid
