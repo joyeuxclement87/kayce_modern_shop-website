@@ -107,3 +107,48 @@
     color: rgba(255, 255, 255, 0.9);
   }
 }
+
+/* Add these styles */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Adjust container max-width */
+.container {
+  max-width: 100% !important;
+  overflow-x: hidden;
+}
+
+/* Improve text wrapping on small screens */
+h1, h2, h3, p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Adjust images for small screens */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Improve table responsiveness */
+table {
+  display: block;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  overflow-x: auto;
+}
+
+/* Better spacing for small screens */
+.py-16 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}

@@ -93,10 +93,10 @@ const App = () => {
 
   return ( 
     <div className={`min-h-screen pt-[104px] ${darkMode ? 'dark bg-brown-darkest text-cream-light' : 'bg-cream-light text-brown-dark'}`}>
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} className="fixed top-0 left-0 right-0 z-50" />
       
       {/* Enhanced Hero Section - Updated Copy */}
-      <section className="relative min-h-screen">
+      <section className="relative min-h-[calc(100vh-104px)] md:min-h-screen">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-brown-darkest/80 to-brown-dark/60 z-10"></div>
           <img 
@@ -107,9 +107,9 @@ const App = () => {
           />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 h-screen flex items-center justify-start">
-          <div className="max-w-2xl lg:max-w-3xl backdrop-blur-sm bg-brown-darkest/40 p-6 md:p-8 rounded-lg">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 text-cream-light leading-tight">
+        <div className="relative z-10 container mx-auto px-3 sm:px-4 h-[calc(100vh-104px)] md:h-screen flex items-center justify-start">
+          <div className="max-w-[90%] w-full sm:max-w-2xl lg:max-w-3xl backdrop-blur-sm bg-brown-darkest/40 p-3 sm:p-6 md:p-8 rounded-lg">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-3 sm:mb-4 md:mb-6 text-cream-light leading-tight">
               Premium Biscuits and Cookies for Rwanda
             </h1>
             
@@ -156,7 +156,7 @@ const App = () => {
 
       {/* Who We Are Section */}
       <section id="who-we-are" className="py-16 md:py-24 bg-cream dark:bg-brown">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-3 sm:px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content Column - Moved to first for better mobile experience */}
             <div className="lg:pr-8 order-2 lg:order-1">
@@ -221,7 +221,7 @@ const App = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/5 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2"></div>
 
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-3 sm:px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-primary font-medium mb-4 inline-block">WHY CHOOSE US</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
@@ -232,7 +232,7 @@ const App = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
             {/* Premium Quality Card */}
             <div className="group bg-cream/50 dark:bg-brown/50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="mb-6 w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
@@ -335,7 +335,7 @@ const App = () => {
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/20 rounded-full blur-[100px]"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-3 sm:px-4 relative">
           {/* Section Header - Updated colors */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-primary-dark dark:text-primary-light font-medium mb-4 inline-block px-4 py-1 bg-primary/10 rounded-full">OUR STORY</span>
@@ -499,7 +499,7 @@ const App = () => {
 
       {/* Enhanced Products Section */}
       <section id="products" className="py-16 md:py-24 bg-cream dark:bg-brown-dark">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-3 sm:px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
               Our Premium Selection
@@ -509,10 +509,10 @@ const App = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12">
             {/* Premium Cookies Card */}
             <div className="bg-cream-light dark:bg-brown rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 sm:h-64 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80" 
                   alt="Premium Cookies" 
@@ -542,7 +542,7 @@ const App = () => {
 
             {/* Specialty Biscuits Card */}
             <div className="bg-cream-light dark:bg-brown rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 sm:h-64 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80" 
                   alt="Specialty Biscuits" 
@@ -572,7 +572,7 @@ const App = () => {
 
             {/* Gift Collections Card */}
             <div className="bg-cream-light dark:bg-brown rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group">
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-48 sm:h-64 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1558024920-b41e1887dc32?auto=format&fit=crop&w=800&q=80" 
                   alt="Gift Collections" 
@@ -625,7 +625,7 @@ const App = () => {
         <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold-light/10 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2 animate-pulse"></div>
         
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-3 sm:px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-primary-dark dark:text-primary-light font-medium mb-4 inline-block px-4 py-1 bg-primary/10 rounded-full">TESTIMONIALS</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">
@@ -637,9 +637,9 @@ const App = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Update all testimonial cards similarly */}
-            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-4 sm:p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
                   {/* Keep existing image */}
@@ -670,7 +670,7 @@ const App = () => {
             </div>
 
             {/* Apply same styling to other testimonial cards */}
-            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-4 sm:p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
                   <img 
@@ -698,7 +698,7 @@ const App = () => {
               </div>
             </div>
 
-            <div className="bg-white/50 dark:bg-brown-dark/50 p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
+            <div className="bg-white/50 dark:bg-brown-dark/50 p-4 sm:p-8 rounded-2xl shadow-lg backdrop-blur-sm transform hover:-translate-y-1 transition-all hover:shadow-xl border border-cream-dark/10 dark:border-brown-light/10">
               <div className="relative mb-8">
                 <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-primary/20 dark:border-primary/30 mx-auto">
                   <img 
@@ -737,34 +737,34 @@ const App = () => {
               <div className="w-16 h-1 bg-primary/50 dark:bg-primary/30 mx-auto"></div>
             </div>
             
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 md:gap-12">
               {/* Enhanced Partner Logo Items */}
-              <div className="group">
+              <div className="group w-1/3 sm:w-auto">
                 <img 
                   src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+1" 
                   alt="Partner 1" 
-                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                  className="h-8 sm:h-12 md:h-14 w-auto"
                 />
               </div>
-              <div className="group">
+              <div className="group w-1/3 sm:w-auto">
                 <img 
                   src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+2" 
                   alt="Partner 2" 
-                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                  className="h-8 sm:h-12 md:h-14 w-auto"
                 />
               </div>
-              <div className="group">
+              <div className="group w-1/3 sm:w-auto">
                 <img 
                   src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+3" 
                   alt="Partner 3" 
-                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                  className="h-8 sm:h-12 md:h-14 w-auto"
                 />
               </div>
-              <div className="group">
+              <div className="group w-1/3 sm:w-auto">
                 <img 
                   src="https://placehold.co/180x60/d4c3b3/6b4423?text=PARTNER+4" 
                   alt="Partner 4" 
-                  className="h-12 md:h-14 opacity-70 group-hover:opacity-100 transition-all duration-300 dark:invert" 
+                  className="h-8 sm:h-12 md:h-14 w-auto"
                 />
               </div>
             </div>
@@ -778,7 +778,7 @@ const App = () => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gold-light/5 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
 
-        <div className="container mx-auto px-4 relative">
+        <div className="container mx-auto px-3 sm:px-4 relative">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-primary font-medium mb-4 inline-block">FAQ</span>
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-brown-dark dark:text-cream-light">
@@ -789,7 +789,7 @@ const App = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto space-y-4">
+          <div className="max-w-[95%] sm:max-w-3xl mx-auto space-y-2 sm:space-y-4">
             {[
               {
                 question: "Where do you source your products?",
@@ -883,7 +883,7 @@ const App = () => {
       </section>
 
       {/* Refined CTA Section - Stats Removed */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-12 sm:py-16 md:py-24 lg:py-32 overflow-hidden">
         {/* Background with parallax effect */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-br from-brown-darkest/95 to-brown-dark/90"></div>
@@ -913,10 +913,10 @@ const App = () => {
             </p>
 
             {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center">
               <a 
                 href="#contact" 
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary hover:bg-primary-dark text-cream-light rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl group transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-cream-light rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl group transform hover:-translate-y-0.5"
               >
                 <span className="mr-2">Get Started Today</span>
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -925,7 +925,7 @@ const App = () => {
               </a>
               <a 
                 href="#products" 
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-cream-light/80 text-cream-light hover:bg-cream-light/10 rounded-xl transition-all duration-300 group transform hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center px-4 sm:px-8 py-3 sm:py-4 border-2 border-cream-light/80 text-cream-light hover:bg-cream-light/10 rounded-xl transition-all duration-300 group transform hover:-translate-y-0.5"
               >
                 View Products
               </a>
@@ -936,7 +936,7 @@ const App = () => {
 
       {/* Minimal Contact Section */}
       <section id="contact" className="py-20 bg-cream-light dark:bg-brown-darkest">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-3 sm:px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-brown-dark dark:text-cream-light">
               Contact Us
@@ -988,8 +988,8 @@ const App = () => {
             </div>
 
             {/* Minimal Contact Form */}
-            <form className="space-y-6 bg-cream/50 dark:bg-brown/50 p-8 rounded-xl">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <form className="space-y-4 sm:space-y-6 bg-cream/50 dark:bg-brown/50 p-3 sm:p-6 md:p-8 rounded-xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <input
                   type="text"
                   placeholder="Name"
@@ -1018,7 +1018,7 @@ const App = () => {
             </form>
 
             {/* Social Links */}
-            <div className="flex justify-center gap-4 mt-12">
+            <div className="flex justify-center gap-3 sm:gap-4 mt-8 sm:mt-12">
               <a 
                 href="https://facebook.com" 
                 className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary text-primary hover:text-cream-light flex items-center justify-center transition-all duration-300"
@@ -1052,9 +1052,9 @@ const App = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-brown-darkest text-cream-light/80 py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <footer className="bg-brown-darkest text-cream-light/80 py-8 sm:py-12 md:py-16">
+        <div className="container mx-auto px-3 sm:px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Company Info */}
             <div>
               <a href="/" className="text-2xl font-serif font-bold text-primary hover:text-primary-dark transition-colors inline-block mb-6">
